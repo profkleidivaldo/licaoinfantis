@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Escola Sabatina Kids</title>
+<meta name="theme-color" content="#ff8a3d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kids">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff8e7;--card:#fff;--ink:#2b2a4c;--mute:#6f6d8c;--line:#f0e3c4;--acc:#ff8a3d;--ok:#35b368;--hl:#fff3a8;--c:#3d9bff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#181a2e;--card:#242744;--ink:#f4f1ff;--mute:#a9a6c9;--line:#34385c;--hl:#5c4d12;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#181a2e;--card:#242744;--ink:#f4f1ff;--mute:#a9a6c9;--line:#34385c;--hl:#5c4d12;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.5 Nunito,system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+h1,h2,b{font-family:'Baloo 2',Nunito,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);transition:transform .25s ease}
+header.hide{transform:translateY(calc(-100% - env(safe-area-inset-top,0px)))}
+.top{display:flex;align-items:center;gap:10px;padding:8px 0}
+.top h1{flex:1;margin:0;font-size:21px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+button{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:14px;padding:8px 13px;cursor:pointer}
+#bk{font-weight:800}
+#menu{position:absolute;right:16px;top:100%;display:flex;flex-wrap:wrap;gap:8px;max-width:330px;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:10px;box-shadow:0 10px 28px #0003;z-index:12}
+#menu[hidden]{display:none}
+main{padding:6px 0 48px}
+.hello{display:flex;align-items:center;gap:12px;margin:6px 0 18px}
+.mas{font-size:46px}.hello h2{margin:0;font-size:27px;line-height:1.1}.hello p{margin:2px 0 0;color:var(--mute)}
+.stars{margin-left:auto;background:#ffe9a3;color:#6b4b00;border-radius:99px;padding:6px 13px;font-weight:800;white-space:nowrap}
+.gc{display:flex;align-items:stretch;gap:14px;background:var(--card);border:3px solid var(--c);border-radius:26px;padding:12px;margin-bottom:16px;cursor:pointer;box-shadow:0 6px 0 color-mix(in srgb,var(--c) 40%,transparent)}
+.gc img{width:86px;height:128px;object-fit:cover;border-radius:16px;flex:none;background:var(--line)}
+.gi{min-width:0;display:flex;flex-direction:column;justify-content:center}
+.gi .em{font-size:28px;line-height:1}.gi b{font-size:22px;line-height:1.15;color:var(--c)}.gi small{color:var(--mute);font-weight:600}
+.gi span{margin-top:4px;font-weight:600}.gi em{font-style:normal;margin-top:6px;align-self:flex-start;background:var(--c);color:#fff;border-radius:99px;padding:2px 11px;font-size:13px;font-weight:800}
+.gh{display:flex;gap:14px;align-items:center;background:var(--card);border:3px solid var(--c);border-radius:26px;padding:12px;margin-bottom:14px}
+.gh img{width:92px;height:138px;object-fit:cover;border-radius:16px;flex:none;background:var(--line)}
+.gh h2{margin:4px 0 0;font-size:24px;line-height:1.15;color:var(--c)}.gh small{color:var(--mute);font-weight:700}
+.en{margin:0 0 6px;color:var(--mute);font-size:14px;font-style:italic}
+.note{background:#e9f4ff;color:#17436e;border-radius:16px;padding:10px 14px;font-size:15px;margin:10px 0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .note{background:#1f3350;color:#cfe5ff}}
+:root[data-theme="dark"] .note{background:#1f3350;color:#cfe5ff}
+.note a{color:inherit;font-weight:800}
+.wk{display:flex;align-items:center;gap:12px;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:10px 12px;margin-bottom:10px;cursor:pointer}
+.wk.cur{border:3px solid var(--c);box-shadow:0 5px 0 color-mix(in srgb,var(--c) 40%,transparent)}
+.num{flex:none;width:44px;height:44px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font:700 21px 'Baloo 2',sans-serif}
+.wi{flex:1;min-width:0}.wi b{display:block;font-size:18px;line-height:1.2}.wi small{color:var(--mute);font-size:13px}
+.st{flex:none;font-size:22px}.st em{font-style:normal;background:var(--c);color:#fff;border-radius:99px;padding:3px 10px;font:800 12px Nunito,sans-serif;white-space:nowrap}
+.lt{font-size:30px;line-height:1.15;margin:8px 0 2px;color:var(--c)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}
+.tools button{border-radius:99px;font-weight:800}
+.tools .on,.tools #say.on{background:var(--c);border-color:var(--c);color:#fff}
+.pgh{margin:24px 0 6px;color:var(--mute);font:700 13px Nunito,sans-serif;text-transform:uppercase;letter-spacing:.07em}
+.read p{font-size:var(--fs,20px);line-height:1.7;margin:0 0 14px;padding:2px 8px;border-radius:12px}
+.read p.h{font:700 1.2em/1.3 'Baloo 2',sans-serif;color:var(--c)}
+.read p.say{background:var(--hl)}
+.read p.fb{opacity:.85}
+.ill{display:block;width:100%;max-width:520px;margin:12px auto 16px;border-radius:20px;box-shadow:0 6px 18px #0002;background:var(--line);cursor:zoom-in}
+.orig{display:block;width:100%;margin:8px 0 14px;border-radius:14px;border:2px solid var(--line);cursor:zoom-in}
+.done{width:100%;margin-top:22px;padding:14px;font:800 19px Nunito,sans-serif;border-radius:20px;background:#ffe9a3;border-color:#ffc93c;color:#6b4b00}
+.done.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.nav{display:flex;gap:10px;margin-top:16px}.nav button{flex:1;font-weight:800}
+.mute{color:var(--mute)}
+#zm{position:fixed;inset:0;background:#000d;z-index:30;display:flex;align-items:center;justify-content:center;padding:10px;overflow:auto}
+#zm[hidden]{display:none}#zm img{max-width:100%;max-height:100%;border-radius:12px;background:#fff}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 22px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;font-weight:800;z-index:40;opacity:0;pointer-events:none;transition:opacity .3s}
+#toast.on{opacity:1}
+</style>
+</head>
+<body>
+<header id="hd"><div class="wrap">
+<div class="top"><button id="bk" aria-label="Voltar" style="visibility:hidden">←</button><h1 id="ttl">Escola Sabatina Kids</h1><button id="mn" aria-label="Ajustes">Aa</button></div>
+<div id="menu" hidden><button id="fm" aria-label="Letra menor">A−</button><button id="fp" aria-label="Letra maior">A+</button><button id="th">🌙 Tema</button><button id="rt">🐢 Voz</button><button id="of">⤓ Salvar offline</button></div>
+</div></header>
+<main><div class="wrap" id="app"><p class="mute">Carregando…</p></div></main>
+<div id="zm" hidden></div><div id="toast" role="status"></div>
+<script>
+const $=id=>document.getElementById(id),esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+const KEY='kids:v1';let S={fs:20,done:{},lang:'pt',rate:.9,tr:{},pages:false,theme:''};
+try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const pd=s=>{const[a,b,c]=s.split('/');return new Date(+c,b-1,+a)};
+const hoje=()=>{const t=new Date();t.setHours(0,0,0,0);return t};
+const fd=s=>pd(s).toLocaleDateString('pt-BR',{day:'numeric',month:'short'}).replace('.','');
+const jget=u=>fetch(u).then(r=>{if(!r.ok)throw 0;return r.json()});
+const toast=m=>{const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),3500)};
+let K=null,V={v:'home'},ST=[],LES=null;
+const grp=id=>K.grupos.find(g=>g.id==id),key=(g,w)=>g.id+'|'+g.trimestre+'|'+w.n;
+const stars=()=>Object.keys(S.done).length;
+const cur=g=>{const t=hoje();return g.semanas.findIndex(w=>t>=pd(w.inicio)&&t<=pd(w.fim))};
+const estado=g=>{const t=hoje(),s=g.semanas;if(!s.length)return'futuro';return t>pd(s[s.length-1].fim)?'passado':t<pd(s[0].inicio)?'futuro':'atual'};
+function apply(){if(S.theme)document.documentElement.dataset.theme=S.theme}
+function go(v){ST.push(V);V=v;history.pushState(null,'');render()}
+window.addEventListener('popstate',()=>{if(ST.length){V=ST.pop();render()}});
+function render(){
+  stopSay();scrollTo(0,0);$('hd').classList.remove('hide');$('bk').style.visibility=ST.length?'visible':'hidden';
+  if(!K)return;({home,group,lesson}[V.v])();
+}
+function home(){
+  $('ttl').textContent='Escola Sabatina Kids';
+  $('app').innerHTML=`<div class="hello"><div class="mas">🐑</div><div><h2>Olá, amiguinho!</h2><p>Escolha a sua turminha</p></div><div class="stars">⭐ ${stars()}</div></div>`+
+  (K.grupos.length?K.grupos.map(g=>{const e=estado(g),c=cur(g),st=e=='atual'&&c>=0?`Semana atual: lição ${g.semanas[c].n}`:e=='passado'?'Lições do trimestre passado':'Em breve';
+    return`<div class="gc" role="button" tabindex="0" data-g="${g.id}" style="--c:${g.cor}"><img src="${esc(g.capa)}" alt="" onerror="this.style.visibility='hidden'"><div class="gi"><div class="em">${g.emoji}</div><b>${esc(g.nome)}</b><small>${esc(g.idade)}</small><span>${esc(g.titulo_pt)}</span><em>${st}</em></div></div>`}).join(''):'<p class="note">Ainda não há lições. Rode o workflow no GitHub (veja o README).</p>');
+}
+function group(){
+  const g=grp(V.g),c=cur(g),e=estado(g);$('ttl').textContent=g.nome;
+  $('app').innerHTML=`<div class="gh" style="--c:${g.cor}"><img src="${esc(g.capa)}" alt="" onerror="this.style.visibility='hidden'"><div><small>${g.emoji} ${esc(g.idade)} · ${esc(g.rotulo)}</small><h2>${esc(g.titulo_pt)}</h2><p class="en">${esc(g.titulo)}</p></div></div>`+
+  (e=='passado'?`<p class="note">📅 Estas são as lições do ${esc(g.rotulo)}. A lição do trimestre atual ainda não foi publicada. Enquanto isso, você pode estudar estas!</p>`:'')+
+  g.semanas.map((w,i)=>`<div class="wk${i==c?' cur':''}" role="button" tabindex="0" data-w="${i}" style="--c:${g.cor}"><div class="num">${w.n}</div><div class="wi"><b>${esc(w.titulo_pt)}</b><small>${esc(w.titulo)} · ${fd(w.inicio)} a ${fd(w.fim)}</small></div><div class="st">${S.done[key(g,w)]?'⭐':i==c?'<em>Esta semana</em>':w.arquivo?'':'⏳'}</div></div>`).join('');
+}
+const navH=(g,i)=>`<div class="nav"><button id="pv" ${i?'':'disabled'}>← Anterior</button><button id="nx" ${i<g.semanas.length-1?'':'disabled'}>Próxima →</button></div>`;
+async function lesson(){
+  const g=grp(V.g),w=g.semanas[V.w];$('ttl').textContent='Lição '+w.n;
+  const head=`<div style="--c:${g.cor}"><h2 class="lt">${esc(w.titulo_pt)}</h2><p class="en">${esc(w.titulo)}</p>`;
+  if(!w.arquivo){$('app').innerHTML=head+`<div class="note">⏳ Esta lição ainda está sendo preparada (texto traduzido e imagens). Ela aparece aqui depois que o workflow do GitHub rodar. Enquanto isso, você pode <a href="${esc(w.pdf)}" target="_blank" rel="noopener">abrir o PDF original (em inglês)</a>.</div></div>`+navH(g,V.w);return}
+  $('app').innerHTML=head+'<p class="mute">Carregando…</p></div>';
+  try{LES=await jget(w.arquivo)}catch(e){$('app').innerHTML=head+'<div class="note">Não consegui abrir esta lição. Conecte-se à internet uma vez para salvá-la neste aparelho.</div></div>'+navH(g,V.w);return}
+  if(V.v!='lesson'||grp(V.g).semanas[V.w]!==w)return;
+  drawLesson();if(S.lang=='pt')liveTr();
+}
+const txt=b=>S.lang=='pt'?(b.pt||S.tr[b.en]||b.en):b.en;
+function drawLesson(){
+  const g=grp(V.g),w=g.semanas[V.w],d=S.done[key(g,w)],miss=S.lang=='pt'&&LES.paginas.some(p=>p.blocos.some(b=>b.en&&!b.pt&&!S.tr[b.en]));
+  const pages=LES.paginas.map((p,i)=>{
+    const has=p.blocos.some(b=>b.t!='img'),orig=(S.pages||!has)&&p.img?`<img class="orig" loading="lazy" src="${esc(p.img)}" alt="Página original">`:'';
+    const bl=p.blocos.map(b=>b.t=='img'?`<img class="ill" loading="lazy" src="${esc(b.src)}" alt="Ilustração">`:`<p class="${b.t=='h'?'h':''}${S.lang=='pt'&&!b.pt&&!S.tr[b.en]?' fb':''}" data-s="1">${esc(txt(b))}</p>`).join('');
+    return`<div class="pgh">Página ${i+1}</div>${orig}${S.pages&&has?'':bl}`}).join('');
+  $('app').innerHTML=`<div style="--c:${g.cor}"><h2 class="lt">${esc(S.lang=='pt'?(LES.titulo_pt||w.titulo_pt):w.titulo)}</h2><p class="en">${esc(w.titulo)}</p>
+  <p class="note">🌐 Texto traduzido automaticamente do inglês. Pode ter errinhos, então peça ajuda a um adulto!${miss?' <b>Traduzindo o resto…</b>':''}</p>
+  <div class="tools">${'speechSynthesis' in window?'<button id="say">🔊 Ouvir</button>':''}<button id="lg">${S.lang=='pt'?'🇧🇷 Português':'🇺🇸 English'}</button><button id="pgs" class="${S.pages?'on':''}">📄 Páginas originais</button></div>
+  <div class="read" id="les" style="--fs:${S.fs}px">${pages}</div>
+  <button class="done${d?' ok':''}" id="dn">${d?'⭐ Lição concluída!':'⭐ Terminei esta lição'}</button>${navH(g,V.w)}</div>`;
+}
+/* tradução automática no aparelho, só para trechos que o workflow não traduziu */
+async function mm(t){const r=await fetch('https://api.mymemory.translated.net/get?langpair=en|pt-BR&q='+encodeURIComponent(t)),j=await r.json();if(j.responseStatus!=200)throw 0;return j.responseData.translatedText}
+let LT=0;
+async function liveTr(){
+  const les=LES,need=[...new Set(les.paginas.flatMap(p=>p.blocos).filter(b=>b.en&&!b.pt&&!S.tr[b.en]).map(b=>b.en))];if(!need.length||LT)return;LT=1;
+  try{for(const t of need){const ch=[];let c='';for(const s of t.match(/[^.!?]+[.!?]*\s*/g)||[t]){if((c+s).length>450&&c){ch.push(c);c=''}c+=s}if(c)ch.push(c);
+    let out='';for(const x of ch)out+=await mm(x)+' ';S.tr[t]=out.trim();save();if(les!==LES||speechSynthesis.speaking)continue;drawLesson()}}
+  catch(e){toast('Sem internet para traduzir o resto')}
+  LT=0;if(les===LES&&V.v=='lesson')drawLesson();
+}
+/* ler em voz alta */
+let TTS=false;
+function stopSay(){TTS=false;try{speechSynthesis.cancel()}catch(e){}document.querySelectorAll('.say').forEach(x=>x.classList.remove('say'));const b=$('say');if(b){b.textContent='🔊 Ouvir';b.classList.remove('on')}}
+function say(){
+  if(TTS)return stopSay();const ps=[...document.querySelectorAll('#les p[data-s]')];if(!ps.length)return;
+  let i=0;TTS=true;$('say').textContent='⏹ Parar';$('say').classList.add('on');
+  const lang=S.lang=='pt'?'pt-BR':'en-US',vs=speechSynthesis.getVoices(),v=vs.find(x=>x.lang.replace('_','-').toLowerCase()==lang.toLowerCase())||vs.find(x=>x.lang.toLowerCase().startsWith(lang.slice(0,2)));
+  const next=()=>{if(!TTS||i>=ps.length)return stopSay();const p=ps[i++];p.classList.add('say');p.scrollIntoView({block:'center',behavior:'smooth'});
+    const u=new SpeechSynthesisUtterance(p.textContent);u.lang=lang;u.rate=S.rate;if(v)u.voice=v;u.onend=()=>{p.classList.remove('say');next()};u.onerror=()=>stopSay();speechSynthesis.speak(u)};
+  next();
+}
+/* salvar tudo para usar offline */
+async function saveAll(){
+  const q=[],seen=new Set(),add=u=>{if(u&&!seen.has(u)){seen.add(u);q.push(u)}};
+  K.grupos.forEach(g=>{add(g.capa);g.semanas.forEach(w=>add(w.arquivo))});let n=0;toast('Baixando… 0%');
+  while(q.length){const u=q.shift();n++;try{const r=await fetch(u);if(u.endsWith('.json')){const j=await r.json();(j.paginas||[]).forEach(p=>{add(p.img);p.blocos.forEach(b=>add(b.src))})}}catch(e){}
+    if(n%8==0)toast('Baixando… '+Math.round(n/(n+q.length)*100)+'%')}
+  toast('Tudo salvo! ✓ Já dá para usar sem internet');
+}
+/* eventos */
+document.addEventListener('click',e=>{
+  const t=e.target,id=t.id;
+  if(t.closest('#zm')){$('zm').hidden=true;return}
+  if(t.classList&&(t.classList.contains('ill')||t.classList.contains('orig'))){$('zm').innerHTML=`<img src="${esc(t.src)}" alt="">`;$('zm').hidden=false;return}
+  if(!t.closest('#menu')&&id!='mn')$('menu').hidden=true;
+  const gc=t.closest('[data-g]');if(gc)return go({v:'group',g:gc.dataset.g});
+  const wk=t.closest('[data-w]');if(wk)return go({v:'lesson',g:V.g,w:+wk.dataset.w});
+  if(id=='bk')return history.back();
+  if(id=='mn'){$('menu').hidden=!$('menu').hidden;return}
+  if(id=='fp'||id=='fm'){S.fs=Math.min(32,Math.max(16,S.fs+(id=='fp'?2:-2)));save();if(V.v=='lesson'&&LES)drawLesson();return}
+  if(id=='th'){S.theme=getComputedStyle(document.documentElement).colorScheme=='dark'?'light':'dark';apply();save();return}
+  if(id=='rt'){S.rate=S.rate<.8?.9:S.rate<1?1.1:.7;t.textContent=S.rate<.8?'🐢 Voz':S.rate<1?'🚶 Voz':'🐇 Voz';save();toast('Velocidade da voz: '+(S.rate<.8?'devagar':S.rate<1?'normal':'rápida'));return}
+  if(id=='of'){$('menu').hidden=true;return saveAll()}
+  if(id=='say')return say();
+  if(id=='lg'){stopSay();S.lang=S.lang=='pt'?'en':'pt';save();drawLesson();if(S.lang=='pt')liveTr();return}
+  if(id=='pgs'){S.pages=!S.pages;save();drawLesson();return}
+  if(id=='dn'){const g=grp(V.g),w=g.semanas[V.w],k=key(g,w);if(S.done[k]){delete S.done[k]}else{S.done[k]=1;toast('Parabéns! Você ganhou uma estrela ⭐')}save();drawLesson();return}
+  if(id=='pv'&&V.w>0){V={...V,w:V.w-1};render()}
+  if(id=='nx'&&V.w<grp(V.g).semanas.length-1){V={...V,w:V.w+1};render()}
+});
+document.addEventListener('keydown',e=>{if(e.key=='Enter'&&e.target.getAttribute&&e.target.getAttribute('role')=='button')e.target.click();if(e.key=='Escape')$('zm').hidden=true});
+let ly=0;
+addEventListener('scroll',()=>{const y=scrollY,h=$('hd');if(y<80||y<ly-3)h.classList.remove('hide');else if(y>ly+4&&y>140){h.classList.add('hide');$('menu').hidden=true}ly=y},{passive:true});
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+apply();
+jget('data/kids.json').then(k=>{K=k;render()}).catch(()=>{$('app').innerHTML='<p class="note">Não consegui carregar as lições. Conecte-se à internet uma vez para salvá-las neste aparelho.</p>'});
+</script>
+</body>
+</html>
