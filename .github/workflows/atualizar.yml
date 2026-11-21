@@ -1,0 +1,25 @@
+name: Atualizar lições infantis
+on:
+  schedule: [{cron: '30 9 * * *'}]
+  workflow_dispatch:
+    inputs:
+      forcar:
+        description: 'Refazer todas as lições (ignora o que já foi gerado)'
+        type: boolean
+        default: false
+permissions:
+  contents: write
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install pymupdf pillow pyyaml deep-translator
+      - run: python tools/atualizar_kids.py ${{ inputs.forcar && '--forcar' || '' }}
+      - run: |
+          git config user.name "github-actions"; git config user.email "actions@github.com"
+          git add -A
+          git diff --cached --quiet || (git commit -m "Atualiza lições infantis" && git push)
