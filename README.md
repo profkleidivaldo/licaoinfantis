@@ -1,37 +1,36 @@
-# Escola Sabatina Kids (PWA)
+# Escola Sabatina Kids — lições infantis em português (PWA)
 
-App para as crianças da igreja: lições infantis da Escola Sabatina **em português**, com ilustrações, leitura em voz alta, estrelinhas e uso offline.
+Puxa as lições infantojuvenis do **Alive in Jesus** (Beginner, Jardim, Primários e, se existir, Juniores), **baixa as figuras**, **traduz do inglês para o português** e mostra num app colorido para as crianças, com leitura em voz alta, estrelinhas de progresso e uso offline.
 
-## De onde vêm as lições
-O repositório Adventech/sabbath-school-lessons **não tem lições infantis em português**. Ele tem, **só em inglês** e em **PDF**:
-Iniciantes (*Beginner*), Jardim (*Kindergarten*), Primários (*Primary*) e Juvenis em slides (*Junior PowerPoints*).
-Por isso o workflow `.github/workflows/atualizar.yml` (todo dia) usa `tools/atualizar_kids.py` para:
-1. achar o trimestre mais recente de cada turma;
-2. baixar o PDF de cada lição, tirar o texto e as ilustrações;
-3. **traduzir o texto automaticamente do inglês para o português** (Google via *deep-translator*, com MyMemory de reserva);
-4. gravar tudo em `kids/` e `data/kids.json`, que o app lê.
+## Como funciona
+1. O workflow `.github/workflows/infantil.yml` roda 2 vezes por dia no GitHub Actions.
+2. `tools/gerar_infantil.py` busca o JSON de cada semana em
+   `https://sabbath-school.adventech.io/api/v3/en/aij/AAAA-0T-NN/SS/index.json`
+   (`AAAA-0T` = trimestre, `NN` = `bg`, `kd`, `pr`, `jr`; `SS` = semana 01–13).
+3. As figuras vão para `img/infantil/`, o texto traduzido (e o original em inglês) para `data/infantil/`.
+4. O app (`index.html`) lê esses arquivos. Botão **"Ver em inglês"** serve para o professor conferir a tradução.
 
-O app ainda tem um tradutor de reserva: se algum trecho ficar sem tradução, ele traduz no aparelho (MyMemory).
-
-## Publicar
-1. Envie todos os arquivos (inclusive `.github/`) para um repositório.
+## Publicar no GitHub Pages
+1. Crie um repositório e envie **todos** os arquivos (inclusive `.github/`, `tools/`, `data/` e `img/`).
 2. Settings → Pages → *Deploy from a branch* → `main` / `(root)`.
 3. Settings → Actions → General → *Workflow permissions* → **Read and write**.
-4. **Actions → Atualizar lições infantis → Run workflow** (a primeira vez demora, pois traduz tudo).
+4. Actions → **Atualizar lições infantis** → *Run workflow* (primeira vez; leva alguns minutos).
 5. Abra `https://SEU-USUARIO.github.io/NOME-DO-REPO/` e use "Adicionar à tela inicial".
 
-## Corrigir traduções
-Tradução automática erra. Para corrigir, coloque em `kids/revisao.json` o texto em inglês e a versão certa:
-```json
-{"Two Birth Announcements": "Dois anúncios de nascimento", "frase em inglês exatamente como aparece": "frase corrigida"}
+## Tradução melhor (opcional)
+Sem configurar nada, usa o Google Tradutor gratuito. Para traduzir com o Claude (linguagem mais simples e nomes bíblicos corretos), crie o segredo **ANTHROPIC_API_KEY** em Settings → Secrets and variables → Actions. Opcional: variável `CLAUDE_MODEL`.
+Traduções ficam em cache (`data/infantil/_traducao.json`), então cada texto é traduzido uma vez só. Se quiser corrigir uma frase, edite esse arquivo e rode o workflow.
+
+## Rodar no computador
 ```
-Depois rode o workflow com **Refazer todas as lições**. As correções têm prioridade sobre o tradutor.
+python tools/gerar_infantil.py              # trimestre atual (e o próximo, se já existir)
+python tools/gerar_infantil.py 2026-04 pr   # um trimestre e nível
+python -m http.server 8000                  # abrir http://localhost:8000
+```
 
-## Imagens
-As ilustrações dos PDFs aparecem junto do texto. Se uma página tiver letras dentro da imagem (atividades, cartazes), elas **não** são traduzidas: use o botão **📄 Páginas originais** para ver a página inteira.
-
-## Observações
-- O trimestre atual das turmas Iniciantes, Jardim e Primários ainda não está no repositório (só o 3º trimestre de 2026). O app mostra o que existe e avisa. Os Juvenis (slides) já estão no 4º trimestre.
-- Para o 4º trimestre, o app e o workflow pegam sozinhos quando for publicado.
-- **Material oficial em português:** a CPB publica os manuais das lições infantojuvenis em português em mais.cpb.com.br (seção de PDFs). Para o professor, vale preferir esse material.
-- O conteúdo pertence à Associação Geral e à CPB. Verifique as condições de uso antes de divulgar publicamente.
+## Observações importantes
+- **Direitos autorais:** o texto e as figuras pertencem à Associação Geral da IASD / Adventech. Use na sua igreja e confirme a permissão antes de divulgar publicamente. Como o workflow salva o conteúdo no repositório, prefira repositório **privado** ou mantenha o link do app restrito à igreja.
+- Os textos bíblicos em várias versões (que a API traz embutidos) são ignorados; ficam só o texto da lição, as listas, os títulos e as figuras.
+- A tradução é automática: vale uma revisão rápida do professor, principalmente nas perguntas e atividades.
+- O endereço da API e a forma do JSON foram observados na página de uma lição (`2026-04-pr/05`). Se a Adventech mudar o formato, ajuste `blocos()` em `tools/gerar_infantil.py`.
+- Códigos de nível (`bg`, `kd`, `pr`) vieram dos links que você enviou; `jr` é tentativa e é ignorado se não existir. Edite `NIVEIS` no script para ajustar.
