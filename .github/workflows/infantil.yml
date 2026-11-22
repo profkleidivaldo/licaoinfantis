@@ -1,0 +1,37 @@
+name: Atualizar lições infantis
+
+on:
+  # Verifica 2 vezes por dia (só faz commit se algo mudou).
+  schedule: [{cron: '30 9,21 * * *'}]
+  # Roda sozinho quando você envia este arquivo ou os scripts.
+  push:
+    paths: ['.github/workflows/infantil.yml', 'tools/**']
+  # Manual: Actions → Atualizar lições infantis → Run workflow.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: infantil
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Buscar, traduzir e salvar as lições
+        env:
+          # Opcional: crie o segredo ANTHROPIC_API_KEY em Settings → Secrets → Actions
+          # para traduzir com o Claude (melhor para crianças). Sem ele usa o Google Tradutor gratuito.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python tools/gerar_infantil.py auto
+      - name: Salvar alterações
+        run: |
+          git config user.name "github-actions"; git config user.email "actions@github.com"
+          git add -A
+          git diff --cached --quiet || (git commit -m "Atualiza lições infantis" && git pull --rebase -q && git push)
